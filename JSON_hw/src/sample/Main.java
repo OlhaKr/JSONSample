@@ -3,6 +3,19 @@ package sample;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.Arrays;
+
+class Books {
+    Book[] books;
+
+    @Override
+    public String toString() {
+        return "Books{" +
+                "books=" + Arrays.toString(books) +
+                '}';
+    }
+}
+
 class Book {
     String name;
     int pages;
@@ -21,36 +34,30 @@ class Book {
 public class Main {
 
     static String JSON_TEXT = """
-                        
+                { 
+                    "books": [      
                 {
                     "name": "The New York Trilogy",
                     "pages": 100,
                     "author": "Paul Auster"
-                }
-                        
-            """;
-
-    static String JSON_TEXT2 = """
+                },
                 {
                     "name": "The Atlas 6",
                     "pages": 200,
                     "author": "Olivia Blake"
-                }  
+                } 
+                ]
+                }     
             """;
 
 
     public static void main(String[] args) {
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        Book book = gson.fromJson(JSON_TEXT, Book.class);
-        System.out.println(book);
-
-        Gson gson2 = new GsonBuilder().setPrettyPrinting().create();
-        Book book2 = gson2.fromJson(JSON_TEXT2, Book.class);
-        System.out.println(book2);
+        Books books = gson.fromJson(JSON_TEXT, Books.class);
+        System.out.println(books);
 
     }
 
 }
-
 
